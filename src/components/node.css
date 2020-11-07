@@ -1,0 +1,66 @@
+.nodecont{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 5px;
+    padding: 3px;
+
+    overflow: hidden;
+
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+
+    background-color: rgb(118, 56, 189);
+    color: white;
+
+    animation: insertNode .7s forwards cubic-bezier(0.57, 0.43, 0.24, 1.79);
+}
+
+.NAnode{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 5px;
+    padding: 3px;
+    border-radius: 50%;
+
+    width: 5px;
+    height: 5px;
+
+    background-color: rgb(204, 190, 221);
+
+    animation: insertNaNode .7s forwards cubic-bezier(0.57, 0.43, 0.24, 1.79);
+}
+
+@keyframes insertNode{
+    0%{
+        width: 0px;
+        height: 0px;
+        background-color: rgb(39, 25, 54);
+    }
+    66%{
+        background-color: rgb(238, 166, 71);
+    }
+    100%{
+        width: 30px;
+        height: 30px;
+
+        background-color: rgb(160, 69, 221);
+        color: white;
+    }
+}
+
+@keyframes insertNaNode{
+    0%{
+        width: 0px;
+        height: 0px;
+        background-color: rgb(39, 25, 54);
+    }
+    100%{
+        width: 5px;
+        height: 5px;
+
+        background-color: rgb(157, 138, 180);
+    }
+}
