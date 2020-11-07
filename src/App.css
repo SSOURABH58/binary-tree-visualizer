@@ -1,38 +1,94 @@
-.App {
-  text-align: center;
+*{
+  padding: 0;
+  margin: 0;
+  border: 0;
+  box-sizing: border-box;
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+body,.App{
+  background-color: rgb(12, 4, 43);
+  color: rgb(243, 219, 248);
+  height: 100vh;
+  font-size: 16px;
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+header{
   display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5px;
+}
+
+.App{
+  display: flex;
+  align-items: center;
   flex-direction: column;
+  justify-content: space-between;
+}
+
+
+.dasbord{
+  margin: 8px;
+  padding: 4px;
+  border-radius: 10px 10px 0 0;
+  background-color: rgba(255, 255, 255, 0.473);
+  color: rgb(255, 255, 255);
+
+  width: 90%;
+
+  display: flex;
+  /* justify-content: center; */
+  align-items: center;
+  flex-direction: column;
+}
+.arrtab{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 95%;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.arrele{
+  background-color: rgb(160, 69, 221);
+  border-radius: 5px;
+  margin: 3px;
+  padding: 3px;
+}
+
+button{
+  margin: 5px;
+  padding: 5px;
+
+  border-radius: 10px;
+  background-color: rgb(160, 69, 221) ;
+  color: white;
+  cursor: pointer;
+}
+
+.lvl{
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.binarytreecont{
+  overflow: hidden;
+  white-space: nowrap;
+
+  width: 98%;
+}
+form{
+  display: flex;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  width: 100%;
 }
-
-.App-link {
-  color: #61dafb;
+.inputbox{
+  width: 80%;
+  padding: 3px;
+  margin: 5px;
+  font-size: 1.3rem;
+  border-radius: 8px;
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.btncont{
+  margin-bottom: 15%;
 }
