@@ -60,11 +60,15 @@ function App() {
 
   // States =----------------------------
 
-  const [Randomarray,setRandomarray]=useState([0,0,0,0,0])
+  const [Randomarray,setRandomarray]=useState([0])
   const [Mapedarray,setMapedarray]=useState([])
   const [Treetimeline,setTreetimeline]=useState([])
   const [onnodecreate,setonnodecreate]=useState(-2)
   const [PrintedElement,setPrintedElement]=useState([])
+  const [Inputval,setInputval]=useState("")
+  const [Length,setLength]=useState(10)
+  const [Zoom,setZoom]=useState(1)
+  const [AnimationSpeed,setAnimationSpeed]=useState(.7)
 
 
   const addtodisplay=(Randomarray,Treetimeline,Mapedarray,PrintedElement=[])=>{
@@ -97,56 +101,97 @@ function App() {
     return arr
   }
 
+  const getInput=(inputs,type)=>{
+    if(inputs.indexOf(',')===-1)
+      inputs = inputs.split(" ")
+    else
+      inputs = inputs.split(",")
+    switch (type) {
+      case "use":
+        inputs = inputs.filter((item,index)=>inputs.indexOf(item)===index)
+        setRandomarray(inputs)
+        setTreetimeline([])
+        setPrintedElement([])
+        break;
+      case "add":
+        inputs=[...Randomarray,...inputs]
+        inputs = inputs.filter((item,index)=>inputs.indexOf(item)===index)
+        setRandomarray([...inputs])
+        setTreetimeline(addtodisplay([...Randomarray],[...Treetimeline],[...Mapedarray],[...PrintedElement]))
+        break;
+    
+      default:
+        break;
+    }
+  setInputval("")
+  }
+
 
   const startManager=()=>{
-    setRandomarray(createRandomArray(10))
+    setRandomarray(createRandomArray(Length))
     setTreetimeline([])
     setPrintedElement([])
-    // setTreetimeline(addtodisplay(-1,Randomarray,Treetimeline,Mapedarray))
   }
 
   useEffect(()=>setMapedarray(createBinaryTree([...Randomarray])),[Randomarray])
   useEffect(()=>{
     setTreetimeline(addtodisplay([...Randomarray],[...Treetimeline],[...Mapedarray],[...PrintedElement]))
   },[onnodecreate])
-  // useEffect(()=>setTreetimeline(addtodisplay(-1)),[Randomarray,Mapedarray,Treetimeline])
+  useEffect(()=>{
+    let arr = []
+    for (let index = 0; index < Length; index++) {
+      arr.push(0)
+    }
+    setRandomarray(arr)},[Length])
 
   //jsx =--------------------------------------------------------------
   return (
     <div className="App">
       <header><h2>Binary Tree Visualizer</h2></header>
+      <div className="visulas" style={{zoom:Zoom}}>
       <div className="binarytreecont">
       {Treetimeline.map((lvl,i)=>
         <div className="lvl" key={i}>
           {lvl.map((sect,j)=>
           <div className="section" key={j}>
             <Node 
-              element={sect.key}
+              element={sect}
               setonnodecreate={setonnodecreate}
               onnodecreate={onnodecreate}
               PrintedElement={PrintedElement}
+              AnimationSpeed={AnimationSpeed}
+              lvl={i}
             ></Node>
           </div>
           )}
         </div>
         )}
         </div>
+        </div>
+      <div className="zoomcont">
+        <h6>{`${Zoom}X`}</h6>
+        <input type="range" className="range" value={Zoom*65} onChange={e=>setZoom((e.target.value/65).toFixed(2))}/>
+      </div>
       <div className="dasbord">
-        <h4>Dashboard</h4>
+        <h1>Dashboard</h1>
         <div className="arrtab">
-        {Randomarray.map(element=>
-          <h3 className="arrele">{element}</h3>
+        {Randomarray.map((element,i)=>
+          <h3 key={i} className="arrele">{element} </h3>
           )}
         </div>
-        <form action="#">
-          <input type="text" className="inputbox"/>
+        <h5>{`Random Array Length : ${Length}`}</h5>
+        <input type="range" className="range" onChange={e=>setLength((e.target.value/5).toFixed())}/>
+        <form action="#" onSubmit={e=>e.target.preventDefault}>
+          <input type="text" className="inputbox" value={Inputval} onChange={e=>setInputval(e.target.value)}/>
         </form>
         <div className="btncont">
-          <button  ><h3>Use</h3></button>
-          <button ><h3>Add</h3></button>
-          <button onClick={()=>startManager()} ><h3>Random</h3></button>
-          <button onClick={()=>setTreetimeline(addtodisplay([...Randomarray],[...Treetimeline],[...Mapedarray],[...PrintedElement,-1]))}><h3>Populate</h3></button>
+          <button className="btnp" onClick={()=>getInput(Inputval,"use")} ><h2>Use</h2></button>
+          <button className="btnp" onClick={()=>getInput(Inputval,"add")} ><h2>Add</h2></button>
+          <button className="btnp" onClick={()=>startManager()} ><h2>Random</h2></button>
+          <button className="btnq" onClick={()=>setTreetimeline(addtodisplay([...Randomarray],[...Treetimeline],[...Mapedarray],[...PrintedElement]))}><h2>Visualiz</h2></button>
         </div>
+        <h5>{`Animation Playback Speed : ${(2.53-AnimationSpeed*1.43).toFixed(2)}x`}</h5>
+        <input type="range" className="range" onChange={e=>setAnimationSpeed(((100-e.target.value)*0.0175+0.01).toFixed(2))}/>
       </div>
     </div>
   );

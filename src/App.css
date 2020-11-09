@@ -9,6 +9,7 @@ body,.App{
   color: rgb(243, 219, 248);
   height: 100vh;
   font-size: 16px;
+  font-family: 'Poppins', sans-serif;
 }
 header{
   display: flex;
@@ -43,9 +44,14 @@ header{
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 95%;
-  overflow: hidden;
+  width: 98%;
+  overflow: scroll;
   white-space: nowrap;
+
+  
+}
+::-webkit-scrollbar{
+  display: none;
 }
 .arrele{
   background-color: rgb(160, 69, 221);
@@ -54,7 +60,7 @@ header{
   padding: 3px;
 }
 
-button{
+.btnp{
   margin: 5px;
   padding: 5px;
 
@@ -63,18 +69,33 @@ button{
   color: white;
   cursor: pointer;
 }
+.btnq{
+  margin: 5px;
+  padding: 3px 5px;
+
+  border-radius: 10px;
+  background-color: white ;
+  color:  rgb(160, 69, 221);
+  cursor: pointer;
+}
+.visulas{
+  max-width: 98%;
+  overflow: scroll;
+  zoom: 100%;
+}
 
 .lvl{
   display: flex;
   align-items: center;
   justify-content: space-around;
+  /* overflow: scroll; */
 }
 
 .binarytreecont{
-  overflow: hidden;
-  white-space: nowrap;
-
-  width: 98%;
+  width: fit-content;
+  /* overflow: scroll; */
+  /* white-space: nowrap; */
+  /* max-width: 98%; */
 }
 form{
   display: flex;
@@ -89,6 +110,28 @@ form{
   font-size: 1.3rem;
   border-radius: 8px;
 }
-.btncont{
-  margin-bottom: 15%;
+.range{
+  -webkit-appearance: none;
+  width: 80%;
+  height: 5px;
+  margin: 10px;
+  border-radius: 5px;
+  outline: none;
+}
+::-webkit-slider-thumb{
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: rgb(160, 69, 221) ;
+  cursor: pointer;
+}
+
+.zoomcont{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 60%;
+  opacity: 50%;
+  margin-top: auto;
 }
