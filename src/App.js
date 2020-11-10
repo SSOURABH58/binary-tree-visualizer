@@ -182,7 +182,7 @@ function App() {
         <h5>{`Random Array Length : ${Length}`}</h5>
         <input type="range" className="range" onChange={e=>setLength((e.target.value/5).toFixed())}/>
         <form action="#" onSubmit={e=>e.target.preventDefault}>
-          <input type="text" className="inputbox" value={Inputval} onChange={e=>setInputval(e.target.value)}/>
+          <input type="text" className="inputbox" value={Inputval} placeholder="ex: 1 2 3 4.. or 1,2,3,4.." onChange={e=>setInputval(e.target.value)}/>
         </form>
         <div className="btncont">
           <button className="btnp" onClick={()=>getInput(Inputval,"use")} ><h2>Use</h2></button>

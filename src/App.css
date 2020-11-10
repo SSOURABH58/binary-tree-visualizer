@@ -132,6 +132,16 @@ form{
   justify-content: center;
   align-items: center;
   width: 60%;
-  opacity: 50%;
   margin-top: auto;
+}
+
+@media screen and (max-height:700px){
+  .dasbord{
+    font-size: small;
+  }
+  button{
+    padding: 3px;
+    margin: 3px;
+    font-size: .7rem;
+  }
 }
