@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
-import { node } from '../algoritheams/binarytreealgos';
 import './node.css'
 
-function Node({element,setonnodecreate,PrintedElement,AnimationSpeed,lvl}){
+
+function Node({element,setonnodecreate,PrintedElement,AnimationSpeed,lvl,animactionManager}){
     const [ishover,setishover]=useState(false)
+    let flag=false
     return(
         <div className={element.key==='NA'?"NAnode":"nodecont"} 
         style={{height:`${element.key==='NA'?20-lvl:100-10*lvl}px` ,
@@ -13,9 +14,14 @@ function Node({element,setonnodecreate,PrintedElement,AnimationSpeed,lvl}){
                 minWidth:`${element.key==='NA'?5:30}px`,
                 animationDuration: `${AnimationSpeed}s`,
                 animationDelay: ``}}
+                onAnimationStart={()=>{ flag=true
+                    console.log(`On Animaction Start ${PrintedElement}`)}}
         onAnimationEnd={e=>{
-            if(PrintedElement[PrintedElement.length-1]==element.key)
-                return setonnodecreate({key:element.key})
+            if(PrintedElement[PrintedElement.length-1]=== element.key.toString()&&flag)
+                {   console.log(`${PrintedElement} and ${element.key}`)
+                    animactionManager()
+                    console.log(`Function called -----------------`)
+                    return setonnodecreate({key:element.key})}
         }}
         onMouseEnter={()=>setishover(!ishover)}
         onMouseLeave={()=>setishover(!ishover)}

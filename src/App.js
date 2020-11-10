@@ -3,7 +3,7 @@ import React,{ useEffect, useState} from 'react'
 import './App.css';
 
 //Algos Import =--------------------------------------------------
-import {insertion,node,triversalgos} from './algoritheams/binarytreealgos'
+import {insertion,node} from './algoritheams/binarytreealgos'
 
 //Components Import =----------------------------------------------------
 import Node from './components/node'
@@ -16,7 +16,7 @@ const createRandomArray=(length)=>{
   let array=[],temp
   for (let index = 0; index < length; index++) {
     temp = (Math.random()*10*length).toFixed()
-    if(array.indexOf(temp)==-1)
+    if(array.indexOf(temp)===-1)
       array.push(temp)
     else
       index--
@@ -78,7 +78,6 @@ function App() {
     let lastelement = PrintedElement[PrintedElement.length-1]
     let nextelement=Randomarray[Randomarray.indexOf(lastelement)+1]
     let arr=[...Treetimeline]
-    let isfound=false
     for (let index = 0; index < Mapedarray.length; index++) {
       if(arr.length<index+1){
         arr.push([])
@@ -86,11 +85,13 @@ function App() {
           arr[index].push({key:'NA'})
         }
       }
-      isfound=false
-      PrintedElement.map(elemnt=>{if(elemnt===nextelement)isfound=true})
+      let isfound=false
+      PrintedElement.map(elemnt=>{if(elemnt===nextelement)
+                                    isfound=true 
+                                    return isfound})
       if(!isfound){
         for (let subindex = 0; subindex < Mapedarray[index].length; subindex++) {
-          if(Mapedarray[index][subindex].key==nextelement )
+          if(Mapedarray[index][subindex].key.toString()===nextelement )
             {arr[index].splice(subindex,1,Mapedarray[index][subindex])
               setPrintedElement([...PrintedElement,nextelement])
             return arr}
@@ -133,10 +134,18 @@ function App() {
     setPrintedElement([])
   }
 
+  const animactionManager=()=>{
+    if(onnodecreate!==PrintedElement[PrintedElement.length-1])
+      {console.log(`collaing For ${PrintedElement[PrintedElement.length-1]}`)
+    setTreetimeline(addtodisplay([...Randomarray],[...Treetimeline],[...Mapedarray],[...PrintedElement]))}
+  }
+
   useEffect(()=>setMapedarray(createBinaryTree([...Randomarray])),[Randomarray])
-  useEffect(()=>{
-    setTreetimeline(addtodisplay([...Randomarray],[...Treetimeline],[...Mapedarray],[...PrintedElement]))
-  },[onnodecreate])
+  // useEffect(()=>{
+  //   if(onnodecreate===PrintedElement[PrintedElement.length-1])
+  //     { console.log(onnodecreate)
+  //       setTreetimeline(addtodisplay([...Randomarray],[...Treetimeline],[...Mapedarray],[...PrintedElement]))}
+  // },[onnodecreate,Randomarray,Treetimeline,Mapedarray,PrintedElement])
   useEffect(()=>{
     let arr = []
     for (let index = 0; index < Length; index++) {
@@ -161,6 +170,7 @@ function App() {
               PrintedElement={PrintedElement}
               AnimationSpeed={AnimationSpeed}
               lvl={i}
+              animactionManager={animactionManager}
             ></Node>
           </div>
           )}
@@ -170,7 +180,7 @@ function App() {
         </div>
       <div className="zoomcont">
         <h6>{`${Zoom}X`}</h6>
-        <input type="range" className="range" value={Zoom*65} onChange={e=>setZoom((e.target.value/65).toFixed(2))}/>
+        <input type="range" className="range" value={Zoom*65} onChange={e=>setZoom((e.target.value/65).toFixed(2))} onMouseUp={()=>animactionManager()}/>
       </div>
       <div className="dasbord">
         <h1>Dashboard</h1>
@@ -191,7 +201,7 @@ function App() {
           <button className="btnq" onClick={()=>setTreetimeline(addtodisplay([...Randomarray],[...Treetimeline],[...Mapedarray],[...PrintedElement]))}><h2>Visualiz</h2></button>
         </div>
         <h5>{`Animation Playback Speed : ${(2.53-AnimationSpeed*1.43).toFixed(2)}x`}</h5>
-        <input type="range" className="range" onChange={e=>setAnimationSpeed(((100-e.target.value)*0.0175+0.01).toFixed(2))}/>
+        <input type="range" className="range" onChange={e=>setAnimationSpeed(((100-e.target.value)*0.0175+0.01).toFixed(2))} onMouseUp={()=>animactionManager()}/>
       </div>
     </div>
   );
